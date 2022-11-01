@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+        Main
+{% endblock %}
+    {% block content %}
+        <p>Order is accepted!</p>
+        <p>Expect Delivery </p>
+        <p>Order information:</p>
+       <table>
+            <tr>
+                <td>candy</td>
+                <td>amount</td>
+                <td>price</td>
+            </tr>
+                {% for candy_data in order_candies_with_price %}
+                        <td>{{ candy_data.candy.candy }}</td>
+                            <td>{{ candy_data.quantity }}></td>
+                                <td>{{ candy_data.price }} $</td>
+                            </form>
+            </tr>
+            {% endfor %}
+        </table>
+<p>Total price: {{ total_price }}</p>
+    {% endblock %}

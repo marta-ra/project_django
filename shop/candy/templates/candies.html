@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+        Main
+{% endblock %}
+    {% block content %}
+        {% for candy in candies %}
+            <tr>
+                <td> {{ candy.candy }} </td>
+                <td> {{ candy.cost }} </td>
+                <td>
+                <form action="{% url 'add_candy' candy_id=candy.id category_id=category.id  %}" method="POST">
+                         {% csrf_token %}
+                        {{ form.as_p }}
+                         <input type="submit" value="add">
+                     </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+    {% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+        Main
+{% endblock %}
+    {% block content %}
+        <p>Total price: {{ total_price }}</p>
+        <table>
+            <tr>
+                <td>candy</td>
+                <td>amount</td>
+                <td>price</td>
+                <td></td>
+            </tr>
+                {% for candy_data in order_candies_with_price %}
+                        <td>{{ candy_data.candy.candy }}</td>
+                            <td><form action="{% url 'update_candy_amount' candy_amount_id=candy_data.id  %}" method="POST">
+                                     {% csrf_token %}
+                                <input type="text" value="{{ candy_data.quantity }}"  name="quantity">
+                            </td>
+                                <td>{{ candy_data.price }} $</td>
+                                <td><input type="submit" value="update">
+                            </td>
+                            </form>
+            </tr>
+            {% endfor %}
+        </table>
+            {% if time_allow %}
+                <form action="{% url 'order_confirm' %}" method="POST">
+                         {% csrf_token %}
+                        {{ form.as_p }}
+                         <input type="submit" value="confirm">
+                     </form>
+            {% else %}
+            <p>Ordering is possible between 08:00 and 22:00.</p>
+            {% endif %}
+
+    {% endblock %}

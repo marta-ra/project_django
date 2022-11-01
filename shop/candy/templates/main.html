@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+        Main
+{% endblock %}
+    {% block content %}
+        {% for category in categories %}
+            <tr>
+                <td> {{ category.category }} </td>
+                <td> <form action="{% url 'candy_show' category_id=category.id  %}" method="GET">
+                         <input type="submit" value="{{ category.category }}">
+                     </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+    {% endblock %}

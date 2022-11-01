@@ -1,0 +1,28 @@
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+
+        <p><a class="btn btn-primary" href="{% url 'main' %}" role="button">Home</a></p>
+        <p><a class="btn btn-primary" href="{% url 'order_show' %}" role="button">Place an order</a></p>
+
+        {% if user.is_authenticated %}
+        <p>Hi {{ user.username }}!</p>
+        <p><a href="{% url 'logout' %}">Log out</a></p>
+          {% else %}
+            <p>You are not logged in.</p>
+        <p> <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sing Up</a></p>
+
+          {% endif %}
+
+        {% block content %}
+        {% endblock %}
+
+</body>
+</html>
